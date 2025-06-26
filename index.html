@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ANRF Dashboard</title>
+  <style>
+body {
+  font-family: lato;
+  /* padding: 5px 15px; */
+  /* background: radial-gradient(circle at 80% 90%, #ffffff, #fffefb, #fffcf7, #fffbf4, #fffaf0, #fff9ec, #fff7e8, #fff6e5, #fff5e1); */
+}
+.zrop-customerBg {
+  display: block;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  opacity: 0.7;
+  background: transparent url(images/effect.svg) right bottom no-repeat;
+  background-size: cover;
+  padding-inline: 20px;
+}
+.zrop-customer__cardIcon img {
+  max-width: 30px;
+}
+.zrop-customer__card::before {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  width: 15px;
+  height: 15px;
+  background: url(images/export.svg);
+}
+.zrop-customer__wrapper {
+  display: flex;
+  gap: 40px;
+}
+.zrop-customer__ltSection {
+  flex-basis: 65%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-self: flex-start;
+  gap: 15px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 10;
+}
+.zrop-customer__rtSection {
+  flex-basis: 35%;
+  position: relative;
+  z-index: 10;
+}
+.zrop-customer__ltSection .zrop-customer__card:last-child {
+  grid-column: span 3;
+}
+.zrop-customer__ltSection .zrop-customer__card {
+  display: flex;
+  flex-direction: column;
+  padding-block: 15px;
+  gap: 10px;
+  min-height: 90px;
+  text-decoration: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border-radius: 7px;
+  transform-origin: center;
+}
+.zrop-customer__ltSection .zrop-customer__card > * {
+  padding: 0 15px;
+}
+.zrop-customer__ltSection .zrop-customer__card:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+.zrop-customer__ltSection .zrop-customer__card:last-child:hover {
+  transform: scale(1.015);
+}
+.zrop-customer__ltSection .zrop-customer__card .zrop-customer__cardIcon img {
+  transition: transform 0.3s ease;
+}
+.zrop-customer__ltSection .zrop-customer__card:hover .zrop-customer__cardIcon img {
+  transform: scale(1.3);
+}
+.zrop-customer__ltSection .zrop-customer__card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 25px;
+  text-transform: uppercase;
+  color: #222222;
+  text-decoration: none;
+}
+.zrop-customer-btn {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: inline-block;
+  margin-top: auto;
+  padding: 8px 14px;
+  background-color: rgba(34,34,34,0.8);
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.zrop-customer__card:hover .zrop-customer-btn {
+  padding: 10px 15px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.zrop-customer__ltSection a.zrop-customer__card:nth-child(1) {
+  background-color: #f9cbc2;
+}
+.zrop-customer__ltSection a.zrop-customer__card:nth-child(2) {
+  background-color: #cef2d3;
+}
+.zrop-customer__ltSection a.zrop-customer__card:nth-child(3) {
+  background-color: #fff4c0;
+}
+.zrop-customer__ltSection a.zrop-customer__card:nth-child(4) {
+  background-color: #ddd9f9;
+}
+.zrop-customer__ltSection a.zrop-customer__card:nth-child(5) {
+  background-color: #c4dbf2;
+}
+.zrop-customer__ltSection a.zrop-customer__card:nth-child(6) {
+  background-color: #c3e5c7;
+}
+.zrop-customer__ltSection a.zrop-customer__card:nth-child(7) {
+  background-color: #b9e0e4;
+}
+.zrop-customer__accordion {
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  margin-block-end: 20px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+}
+.zrop-customer__accordion h3 {
+  background-color: #565656;
+  padding: 10px 20px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  -webkit-border-top-left-radius: 7px;
+  -webkit-border-top-right-radius: 7px;
+  -moz-border-radius-topleft: 7px;
+  -moz-border-radius-topright: 7px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+.zrop-customer__accordion ul {
+  list-style: none;
+  display: inline-block;
+  width: 100%;
+  margin: 5px 0 10px;
+  padding: 0;
+}
+.zrop-customer__accordion ul li {
+  padding: 10px 20px;
+}
+.zrop-customer__accordion ul li a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #4c4c4c;
+}
+.zrop-customer__accordion ul li a:hover {
+  text-decoration: underline;
+}
+.zrop-footerImages {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.zrop-footerImages img {
+  max-height: 200px;
+  object-fit: contain;
+  pointer-events: auto;
+  flex-shrink: 0;
+}
+.zrop-footerImages img:nth-child(1) {
+  max-height: 220px;
+}
+.zrop-footerImages img:nth-child(2) {
+  max-height: 400px;
+  padding-bottom: 40px;
+}
+.zrop-footerImages img:nth-child(3) {
+  padding: 10px 20px 10px;
+  max-height: 150px;
+}
+  </style>
+</head>
+<body>
+  <div class="zrop-customer">
+    <div class="zrop-customerBg"></div>
+    <div class="zrop-customer__wrapper">
+      <div class="zrop-customer__ltSection">
+        <a target="_blank" href="https://www.anrfonline.in/ANRF/maha_Instructions?HomePage=New" class="zrop-customer__card">
+          <span class="zrop-customer__cardIcon">
+            <img src="images/1.svg" alt="">
+          </span>
+          <h3>Mission for Advancement in High-impact Areas (MAHA)</h3>
+          <span class="zrop-customer-btn">More Info</span>
+        </a>
+        <a target="_blank" href="https://www.anrfonline.in/ANRF/seminar_symposia" class="zrop-customer__card">
+          <span class="zrop-customer__cardIcon">
+            <img src="images/2.svg" alt="">
+          </span>
+          <h3>Seminar/Symposia (SSY)</h3>
+          <span class="zrop-customer-btn">More Info</span>
+        </a>
+        <a target="_blank" href="https://www.anrfonline.in/ANRF/inrg_anrf?HomePage=New" class="zrop-customer__card">
+          <span class="zrop-customer__cardIcon">
+            <img src="images/3.svg" alt="">
+          </span>
+          <h3>Inclusivity Research Grant (IRG)</h3>
+          <span class="zrop-customer-btn">More Info</span>
+        </a>
+        <a target="_blank" href="https://www.anrfonline.in/ANRF/ecrg_anrf?HomePage=New" class="zrop-customer__card">
+          <span class="zrop-customer__cardIcon">
+            <img src="images/4.svg" alt="">
+          </span>
+          <h3>Prime Minister Early Career Research Grant</h3>
+          <span class="zrop-customer-btn">More Info</span>
+        </a>
+        <a target="_blank" href="https://www.anrfonline.in/ANRF/jcbose_anrf" class="zrop-customer__card">
+          <span class="zrop-customer__cardIcon">
+            <img src="images/5.svg" alt="">
+          </span>
+          <h3>J. C. Bose Grant (JBG)</h3>
+          <span class="zrop-customer-btn">More Info</span>
+        </a>
+        <a target="_blank" href="https://www.anrfonline.in/ANRF/its" class="zrop-customer__card">
+          <span class="zrop-customer__cardIcon">
+            <img src="images/6.svg" alt="">
+          </span>
+          <h3>International Travel Scheme (ITS)</h3>
+          <sspan class="zrop-customer-btn">More Info</span>
+        </a>
+        <a target="_blank" href="https://www.anrfonline.in/ANRF/PAIR?HomePage=New" class="zrop-customer__card">
+          <span class="zrop-customer__cardIcon">
+            <img src="images/7.svg" alt="">
+          </span>
+          <h3>Partnerships for Accelerated Innovation and Research (PAIR)</h3>
+          <span class="zrop-customer-btn">More Info</span>
+        </a>
+      </div>
+      <div class="zrop-customer__rtSection">
+        <div class="zrop-customer__accordion">
+          <h3>Schemes & Programs</h3>
+          <ul>
+            <li><a target="_blank" href="https://www.anrfonline.in/ANRF/emr?HomePage=New">Core Research Grant (CRG)</a></li>
+            <li><a target="_blank" href="https://www.anrfonline.in/ANRF/srg_Instructions?HomePage=New">Start-up Research Grant (SRG)</a></li>
+            <li><a target="_blank" href="https://www.anrfonline.in/ANRF/Supra?HomePage=New">SERB-SUPRA</a></li>
+            <li><a target="_blank" href="https://www.anrfonline.in/ANRF/Irhpa_Instruction?HomePage=New">Intensification of Research in High Priority Areas (IRHPA)</a></li>
+          </ul>
+        </div>
+        <div class="zrop-customer__accordion">
+          <h3>Awards & Fellowships</h3>
+          <ul>
+            <li><a target="_blank" href="https://www.anrfonline.in/ANRF/jcbose_fellowship?HomePage=New">JC Bose Fellowship</a></li>
+            <li><a target="_blank" href="https://www.anrfonline.in/ANRF/Ramanujan_fellowship?HomePage=New">Ramanujan Fellowship</a></li>
+            <li><a target="_blank" href="https://www.anrfonline.in/ANRF/npdf?HomePage=New">National Post Doctoral Fellowship (N-PDF)</a></li>
+            <li><a target="_blank" href="https://www.anrfonline.in/ANRF/Tare">TARE Fellowship</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="zrop-footerImages">
+      <img src="images/btm1.svg" alt="AI Robot Graph" />
+      <img src="images/btm2.svg" alt="India Map" />
+      <img src="images/btm3.svg" alt="Zia Charts" />
+    </div>
+    </div>
+  </div>
+</body>
+</html>
